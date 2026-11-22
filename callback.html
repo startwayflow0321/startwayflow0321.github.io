@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VICE Uploader · TikTok</title>
+<style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:640px;margin:60px auto;padding:0 16px;text-align:center;color:#eee;background:#120a1f}h1{color:#ff4fb8}code{background:#2a1840;padding:6px 10px;border-radius:6px;word-break:break-all}</style></head>
+<body><h1>VICE Uploader</h1><p id="m">Connecting your TikTok account…</p>
+<script>
+// Hands the TikTok authorization code to the VICE Uploader app running on the owner's computer.
+var q = location.search;
+var p = new URLSearchParams(q);
+if (p.get('error')) {
+  document.getElementById('m').textContent = 'TikTok returned an error: ' + p.get('error_description');
+} else if (p.get('code')) {
+  location.replace('http://127.0.0.1:8765/callback' + q);
+  setTimeout(function () {
+    document.getElementById('m').innerHTML = 'If the app did not open, make sure VICE Uploader is running and reload this page.';
+  }, 4000);
+}
+</script></body></html>
